@@ -1,5 +1,7 @@
 package telefy;
 
+import telefy.view.View;
+import telefy.view.HtmlPageView;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import java.io.IOException;
@@ -10,10 +12,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.TimeZone;
-import javax.net.ssl.SSLEngineResult;
 
 public class HttpResponse {
-		public static final int COOKIE_EXPIRATION = 1;  // In minutes.
+		public static final int COOKIE_EXPIRATION = 15;  // In minutes.
 		public static final SimpleDateFormat UTC_FORMATTER = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z");
 		static {
 			UTC_FORMATTER.setTimeZone(TimeZone.getTimeZone("UTC"));
