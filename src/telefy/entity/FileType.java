@@ -1,4 +1,4 @@
-package telefy;
+package telefy.entity;
 
 public enum FileType {
 	CSS("text/css"),

@@ -1,4 +1,4 @@
-package telefy;
+package telefy.entity;
 
 import java.util.Date;
 

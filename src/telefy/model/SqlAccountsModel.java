@@ -1,5 +1,6 @@
-package telefy;
+package telefy.model;
 
+import telefy.entity.Account;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;

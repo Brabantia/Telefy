@@ -1,5 +1,6 @@
-package telefy;
+package telefy.model;
 
+import telefy.entity.Resource;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystems;

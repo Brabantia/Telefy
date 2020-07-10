@@ -1,8 +1,15 @@
-package telefy;
+package telefy.controller;
 
+import telefy.model.ResourceModel;
+import telefy.model.AccountsModel;
+import telefy.entity.Account;
+import telefy.view.LoginErrorTagView;
+import telefy.view.TemplatedPageView;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import java.io.IOException;
+import telefy.HttpRequest;
+import telefy.HttpResponse;
 
 public class LoginHandler implements HttpHandler {
 	public final String LOGIN_TEMPLATE = "templates/login.html";
@@ -35,7 +42,7 @@ public class LoginHandler implements HttpHandler {
 		TemplatedPageView template = this.templateController.getTemplatePage(req);
 		resp.set(template);
 
-		TemplatedPageView loginView = new TemplatedPageView("CONTENT", new String(this.resourceModel.get(LOGIN_TEMPLATE).data));
+		TemplatedPageView loginView = new TemplatedPageView("CONTENT", new String(this.resourceModel.get(LOGIN_TEMPLATE).getData()));
 		template.put(loginView);
 
 		if (req.contains("account") && req.contains("user_name")) {

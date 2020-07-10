@@ -1,6 +1,6 @@
-package telefy;
+package telefy.view;
 
-class ManufacturerMenuTagView extends HtmlPageView {
+public class ManufacturerMenuTagView extends HtmlPageView {
 	public static final String TAG = "MANUFACTURER_MENU";
 
 	public static final String MENU_ITEM_START_CURRENT = "<li class=\"current\"><a href=\"index.html?man=";

@@ -1,4 +1,4 @@
-package telefy;
+package telefy.view;
 
 public class LoginErrorTagView extends HtmlPageView {
 	public static final String TAG = "ERROR";
