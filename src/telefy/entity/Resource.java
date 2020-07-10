@@ -1,11 +1,13 @@
-package telefy;
+package telefy.entity;
 
 import java.nio.file.Path;
 
 public class Resource {
-	public final String path, file, extension;
-	public final FileType type;
-	public final byte[] data;
+	private final String path;
+	private final String file;
+	private final String extension;
+	private final FileType type;
+	private final byte[] data;
 
 	public Resource(String path, String file, String extension, byte[] data) {
 		this.path = path;
@@ -20,12 +22,12 @@ public class Resource {
 	}
 
 	public int length() {
-		return data.length;
+		return getData().length;
 	}
 
 	@Override
 	public String toString() {
-		return "Resource[path=" + path + ", file=" + file + ", extension=" + extension +  ", length=" + length() + "]";
+		return "Resource[path=" + getPath() + ", file=" + getFile() + ", extension=" + getExtension() +  ", length=" + length() + "]";
 	}
 
 	public static String getPath(Path fullPath) {
@@ -57,5 +59,40 @@ public class Resource {
 		}
 
 		return file.substring(file.lastIndexOf(".")+1);
+	}
+
+	/**
+	 * @return the path
+	 */
+	public String getPath() {
+		return path;
+	}
+
+	/**
+	 * @return the file
+	 */
+	public String getFile() {
+		return file;
+	}
+
+	/**
+	 * @return the extension
+	 */
+	public String getExtension() {
+		return extension;
+	}
+
+	/**
+	 * @return the type
+	 */
+	public FileType getType() {
+		return type;
+	}
+
+	/**
+	 * @return the data
+	 */
+	public byte[] getData() {
+		return data;
 	}
 }

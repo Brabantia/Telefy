@@ -1,4 +1,4 @@
-package telefy;
+package telefy.view;
 
 public interface View {
 	public int length();

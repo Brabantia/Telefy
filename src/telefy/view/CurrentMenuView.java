@@ -1,4 +1,4 @@
-package telefy;
+package telefy.view;
 
 public class CurrentMenuView extends HtmlPageView {
 	public static final String ABOUT = "/about";

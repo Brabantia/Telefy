@@ -1,4 +1,4 @@
-package telefy;
+package telefy.view;
 
 public class LoginTagView extends HtmlPageView {
 	public static final String TAG = "LOGIN";

@@ -1,8 +1,12 @@
-package telefy;
+package telefy.controller;
 
+import telefy.model.ResourceModel;
+import telefy.view.TemplatedPageView;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import java.io.IOException;
+import telefy.HttpRequest;
+import telefy.HttpResponse;
 
 public class IndexHandler implements HttpHandler {
 	private final ResourceModel resourceModel;

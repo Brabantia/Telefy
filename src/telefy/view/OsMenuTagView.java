@@ -1,6 +1,6 @@
-package telefy;
+package telefy.view;
 
-class OsMenuTagView extends HtmlPageView {
+public class OsMenuTagView extends HtmlPageView {
 	public static final String TAG = "OS_MENU";
 
 	public static final String MENU_ITEM_START_CURRENT = "<li class=\"current\"><a href=\"index.html?os=";

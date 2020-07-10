@@ -1,4 +1,4 @@
-package telefy;
+package telefy.view;
 
 import java.util.HashMap;
 

@@ -1,4 +1,4 @@
-package telefy;
+package telefy.view;
 
 public class HtmlPageView implements View {
 	private final StringBuilder html = new StringBuilder();
