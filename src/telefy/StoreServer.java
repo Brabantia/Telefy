@@ -1,5 +1,6 @@
 package telefy;
 
+import telefy.controller.AboutHandler;
 import telefy.controller.LoginHandler;
 import telefy.controller.LogoutHandler;
 import telefy.controller.FileHandler;
@@ -60,6 +61,7 @@ public class StoreServer {
 		webServer.createContext("/logout", new LogoutHandler());
 		webServer.createContext("/res", new FileHandler(resourceModel));
 		webServer.createContext("/reload", new ReloadHandler(resourceModel));
+		webServer.createContext("/about", new AboutHandler(templateController, resourceModel));
 
 		// Start accepting HTTP requests.
 		webServer.setExecutor(Executors.newFixedThreadPool(30));
