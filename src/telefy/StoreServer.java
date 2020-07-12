@@ -18,13 +18,16 @@ import java.sql.SQLException;
 import java.util.concurrent.Executors;
 
 public class StoreServer {
+	// Port that the webserver is listening on.
 	public static final int PORT = 13754;
-	public static final String RESOURCE_FOLDER = "D:\\Documents\\NetBeansProjects\\Telefy\\resources\\";
+	// Connection settings to a Microsoft SQL Server
 	public static final String SQL_SERVER = "cis55.missioncollege.edu";
 	public static final String SQL_PORT = "1433";
 	public static final String SQL_DATABASE = "cis55_38";
 	public static final String SQL_USER = "cis55_38";
 	public static final String SQL_PASSWORD = "sql4u!";
+	// Use the relative path from the netbeans working directory.
+	public static final String RESOURCE_FOLDER = "resources\\";
 
 	private static Connection sqlServer;
 	private static HttpServer webServer;
@@ -33,7 +36,8 @@ public class StoreServer {
 	 * @param args the command line arguments
 	 * @throws java.io.IOException
 	 * @throws java.sql.SQLException
-	**/
+	*
+	 */
 	public static void main(String[] args) throws IOException, SQLException {
 		// Create server instances.
 		webServer = HttpServer.create(new InetSocketAddress(PORT), 0);
@@ -42,8 +46,10 @@ public class StoreServer {
 		System.out.println("Connected to SQL Server: " + SQL_DATABASE);
 
 		// Create model classes for accessing data.
-		FileResourceModel resourceModel = new FileResourceModel(RESOURCE_FOLDER);
 		AccountsModel accountsModel = new SqlAccountsModel(sqlServer);
+		FileResourceModel resourceModel = new FileResourceModel(RESOURCE_FOLDER);
+		resourceModel.loadResources();
+		System.out.println(resourceModel);
 
 		// Create helper classes.
 		TemplateController templateController = new TemplateController(resourceModel);
