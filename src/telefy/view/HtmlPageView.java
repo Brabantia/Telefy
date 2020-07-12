@@ -2,12 +2,19 @@ package telefy.view;
 
 public class HtmlPageView implements View {
 	private final StringBuilder html = new StringBuilder();
+	private final String tag;
 
 	public HtmlPageView() {
+		this.tag = null;
 	}
 
 	public HtmlPageView(String text) {
+		this(null, text);
+	}
+	
+	public HtmlPageView(String tag, String text) {
 		this.html.append(text);
+		this.tag = tag;
 	}
 
 	@Override
@@ -35,6 +42,6 @@ public class HtmlPageView implements View {
 	}
 
 	public String getTag() {
-		return null;
+		return this.tag;
 	}
 }
