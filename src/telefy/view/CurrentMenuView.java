@@ -27,7 +27,7 @@ public class CurrentMenuView extends HtmlPageView {
 			super.add("<li class=\"current has-children\">");
 		} else {
 			this.tag = "MENU_CURRENT_HOME";
-			super.add("<li class=\"current has-children\">");
+			super.add("<li class=\"current\">");
 		}
 	}
 

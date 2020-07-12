@@ -953,7 +953,7 @@ input[type="button"].btn--primary:focus {
 
 .header__search-form input[type="search"] {
    background-color: transparent;
-   color: #000000;
+   color: #FFF;
    height: auto;
    width: 100%;
    font-size: 6rem;
