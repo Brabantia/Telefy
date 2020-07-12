@@ -24,10 +24,10 @@ public class TemplatedPageView extends HtmlPageView {
 	}
 
 	private void build() {
-		if (built) {
+		if (this.built) {
 			return;
 		}
-		built = true;
+		this.built = true;
 
 		String[] sections = this.template.split(JAVA_TAG);
 		boolean javaSection = true;
