@@ -2,8 +2,6 @@ package telefy.controller;
 
 import telefy.model.FileResourceModel;
 import telefy.view.HtmlPageView;
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
 import java.io.IOException;
 import telefy.HttpRequest;
 import telefy.HttpResponse;

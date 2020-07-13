@@ -36,10 +36,10 @@ public class StoreServer {
 	private static HttpServer webServer;
 
 	/**
-	 * @param args the command line arguments
-	 * @throws java.io.IOException
-	 * @throws java.sql.SQLException
-	*
+	 *
+	 * @param args
+	 * @throws IOException
+	 * @throws SQLException
 	 */
 	public static void main(String[] args) throws IOException, SQLException {
 		// Create server instances.
