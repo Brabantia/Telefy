@@ -9,7 +9,9 @@ import telefy.controller.IndexHandler;
 import telefy.controller.ReloadHandler;
 import telefy.model.FileResourceModel;
 import telefy.model.AccountsModel;
+import telefy.model.ProductsModel;
 import telefy.model.SqlAccountsModel;
+import telefy.model.SqlProductsModel;
 import com.sun.net.httpserver.HttpServer;
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -34,10 +36,10 @@ public class StoreServer {
 	private static HttpServer webServer;
 
 	/**
-	 * @param args the command line arguments
-	 * @throws java.io.IOException
-	 * @throws java.sql.SQLException
-	*
+	 *
+	 * @param args
+	 * @throws IOException
+	 * @throws SQLException
 	 */
 	public static void main(String[] args) throws IOException, SQLException {
 		// Create server instances.
@@ -48,15 +50,16 @@ public class StoreServer {
 
 		// Create model classes for accessing data.
 		AccountsModel accountsModel = new SqlAccountsModel(sqlServer);
+		ProductsModel productsModel = new SqlProductsModel(sqlServer);
 		FileResourceModel resourceModel = new FileResourceModel(RESOURCE_FOLDER);
 		resourceModel.loadResources();
 		System.out.println(resourceModel);
 
 		// Create helper classes.
-		TemplateController templateController = new TemplateController(resourceModel);
+		TemplateController templateController = new TemplateController(resourceModel, productsModel);
 
 		// Create webpages.
-		webServer.createContext("/", new IndexHandler(templateController, resourceModel));
+		webServer.createContext("/", new IndexHandler(templateController, resourceModel, productsModel));
 		webServer.createContext("/login", new LoginHandler(templateController, resourceModel, accountsModel));
 		webServer.createContext("/logout", new LogoutHandler());
 		webServer.createContext("/res", new FileHandler(resourceModel));
