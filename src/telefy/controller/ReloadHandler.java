@@ -16,6 +16,6 @@ public class ReloadHandler extends SafeHttpHandler {
 	@Override
 	public void handle(HttpRequest req, HttpResponse resp) throws IOException {
 		this.resourceModel.loadResources();
-		resp.set(new HtmlPageView("Resources Reloaded!")).respondRedirect("/");
+		resp.respondRedirect("/");
 	}
 }
