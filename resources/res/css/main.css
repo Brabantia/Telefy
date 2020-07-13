@@ -1,71 +1,4 @@
 /* ===================================================================
- *
- *  Philosophy v1.0 Main Stylesheet
- *  1-2-2018
- *  ------------------------------------------------------------------
- *
- *  TOC:
- *  # base style overrides
- *    ## links
- *  # typography & general theme styles
- *    ## Lists
- *    ## responsive video container
- *    ## floated image
- *    ## tables
- *    ## spacing
- *    ## pace.js styles - minimal
- *  # preloader (line scale)
- *  # forms
- *    ## Style Placeholder Text
- *    ## Change Autocomplete styles in Chrome
- *  # buttons
- *  # additional components
- *    ## alert box
- *    ## additional typo styles
- *    ## pagination
- *  # reusable and common theme styles
- *    ## mediaelement style overrides
- *    ## close button for search and mobile navigation
- *    ## slick slider
- *    ## masonry entries
- *    ## post formats - masonry view
- *  # pageheader
- *    ## header logo
- *    ## header social
- *    ## header-toggle
- *    ## header-search
- *    ## header search trigger
- *    ## main navigation
- *    ## pageheader content
- *    ## feature section animation
- *  # s-content
- *    ## masonry layout
- *  # s-extra
- *    ## popular posts
- *    ## about
- *    ## tags
- *  # footer
- *    ## footer link list
- *    ## subscribe form
- *    ## copyright
- *    ## go to top
- *  # blog styles
- *    ## content main
- *    ## content media
- *    ## post tags
- *    ## author profile
- *    ## blog single page navigation
- *    ## format gallery
- *    ## format video
- *    ## format audio
- *    ## comments
- *  # page styles
- *    ## contact page
- *
- * =================================================================== */
-
-
-/* ===================================================================
  * # base style overrides
  *
  * ------------------------------------------------------------------- */
@@ -1649,6 +1582,65 @@ body.search-is-visible {
       font-size: 3.6rem;
    }
 
+}
+
+
+/* ===================================================================
+ * # single__content
+ *
+ * ------------------------------------------------------------------- */
+.single__content {
+   width:100%;
+}
+
+.single__content__box {
+	max-width:600px;
+	margin: auto;
+	padding: 2rem;
+	background-image: url(../images/background-cell.jpg);
+	border: solid 3px #CCC;
+}
+.single__content__title {
+   text-align:center;
+	color:#FFF; font-size:4rem;
+	line-height:1.375;
+	margin-top:0;
+	margin-bottom:2.1rem;
+}
+
+.single__content__text {
+	border:solid 3px #CCC;
+	margin: 2rem;
+	padding: 2rem;
+	color: #FFF;
+	font-size: 2rem;
+	line-height: 1.5;
+}
+
+.single__content__form {
+	max-width: 400px;
+   margin: auto;
+}
+
+.single__content__form p {
+	color:#FFF;
+	font-size:2rem;
+	line-height: 1.5;
+	padding: 1rem;
+}
+
+.single__content__form input {
+	margin:0; width:100%; border:solid 3px #CCC; background-color:#FFF; padding:5px; height:4rem;
+}
+
+.single__content__form button {
+	display: block;
+	font-size: 2rem;
+	letter-spacing: normal;
+	height: unset;
+	line-height: 1rem;
+	padding: 2rem;
+	margin: auto;
 }
 
 /* -------------------------------------------------------------------

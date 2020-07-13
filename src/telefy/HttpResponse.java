@@ -38,6 +38,9 @@ public class HttpResponse {
 		public void respondBadRequest() throws IOException {
 			close(HttpURLConnection.HTTP_BAD_REQUEST);
 		}
+		public void respondUnauthorized() throws IOException {
+			close(HttpURLConnection.HTTP_UNAUTHORIZED);
+		}
 		public void respondNotFound() throws IOException {
 			close(HttpURLConnection.HTTP_NOT_FOUND);
 		}
