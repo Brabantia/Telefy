@@ -53,6 +53,10 @@ public class SqlAccountsModel implements AccountsModel {
 
 	@Override
 	public Account getLogin(String email) {
+		if (email == null || email.isEmpty()) {
+			return new Account();
+		}
+
 		String query = "SELECT account_id, email, name, password_hash FROM Account WHERE email = '" + email + "';";
 
 		for (int attempt = 1; attempt <= 3; ++attempt) {
@@ -74,5 +78,14 @@ public class SqlAccountsModel implements AccountsModel {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public Account getLoginById(String id) {
+		try {
+			return getLogin(Integer.parseInt(id));
+		} catch (NumberFormatException ignored) {
+			return new Account();
+		}
 	}
 }
