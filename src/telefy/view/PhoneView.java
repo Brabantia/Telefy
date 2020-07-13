@@ -6,13 +6,16 @@ public class PhoneView extends TemplatedPageView {
 	public static final String TITLE_TAG = "TITLE";
 	public static final String TAGS_TAG = "TAGS";
 	public static final String IMAGE_TAG = "IMAGE";
+	public static final String LOGO_TAG = "LOGO";
 	public static final String TAG_START = "<a href=\"";
 	public static final String TAG_MIDDLE = "\">";
 	public static final String TAG_END = "</a>";
 	public static final String IMAGE_START = "<img src=\"";
 	public static final String IMAGE_MIDDLE = "\" alt=\"";
 	public static final String IMAGE_END = "\">";
-	
+	public static final String LOGO_START = "<a href=\"res/single-standard.html\" class=\"entry__thumb-link ";
+	public static final String LOGO_END = "__logo\">";
+
 	public static class Tag {
 		private final String name, url;
 		public Tag(String name, String url) {
@@ -33,11 +36,11 @@ public class PhoneView extends TemplatedPageView {
 			return url;
 		}
 	}
-	
+
 	public PhoneView(String template) {
 		super(template);
 	}
-	
+
 	public void setPrice(int price) {
 		if (price < 0) {
 			throw new RuntimeException("Price must be non-negative: " + price);
@@ -46,17 +49,17 @@ public class PhoneView extends TemplatedPageView {
 			super.put(new HtmlPageView(PRICE_TAG, "FREE"));
 		} else {
 			super.put(new HtmlPageView(PRICE_TAG, "$"+price));
-		}	
+		}
 	}
-	
+
 	public void setTitle(String title) {
 		super.put(new HtmlPageView(TITLE_TAG, title));
 	}
-	
+
 	public void setText(String text) {
 		super.put(new HtmlPageView(TEXT_TAG, text));
 	}
-	
+
 	public void setTags(Tag... tags) {
 		StringBuilder text = new StringBuilder();
 		for (Tag tag : tags) {
@@ -64,12 +67,16 @@ public class PhoneView extends TemplatedPageView {
 		}
 		super.put(new HtmlPageView(TAGS_TAG, text.toString()));
 	}
-	
+
 	public void setImage(String url, String altText) {
 		if (altText == null) {
 			altText = "";
 		}
-		
+
 		super.put(new HtmlPageView(IMAGE_TAG, IMAGE_START+url+IMAGE_MIDDLE+altText+IMAGE_END));
+	}
+
+	public void setLogo(String logo) {
+		super.put(new HtmlPageView(LOGO_TAG, LOGO_START+logo.toLowerCase()+LOGO_END));
 	}
 }
