@@ -19,7 +19,7 @@ public class ReloadHandler extends SafeHttpHandler {
 
 	@Override
 	public void handle(HttpRequest req, HttpResponse resp) throws IOException {
-		if (this.accountsModel.getLogin(Integer.parseInt(req.get("account", "-1"))).isAdmin()) {
+		if (this.accountsModel.getLoginById(req.get("account")).isAdmin()) {
 			this.resourceModel.loadResources();
 			resp.respondRedirect("/");
 			try {

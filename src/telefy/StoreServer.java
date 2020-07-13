@@ -66,7 +66,7 @@ public class StoreServer {
 		System.out.println(resourceModel);
 
 		// Create helper classes.
-		TemplateController templateController = new TemplateController(resourceModel, productsModel);
+		TemplateController templateController = new TemplateController(resourceModel, accountsModel, productsModel);
 
 		// Create webpages.
 		webServer.createContext("/", new IndexHandler(templateController, resourceModel, productsModel));
