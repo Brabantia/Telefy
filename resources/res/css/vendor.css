@@ -1,6 +1,6 @@
-/* =================================================================== 
+/* ===================================================================
  *
- *  Philosophy v1.0 Vendor/Third Party CSS 
+ *  Philosophy v1.0 Vendor/Third Party CSS
  *  12-30-2017
  *  ------------------------------------------------------------------
  *
@@ -17,7 +17,7 @@
 /* ===================================================================
  * # lity - v1.6.6 - 2016-04-22
  *   http://sorgalla.com/lity/
- *   Copyright (c) 2016 Jan Sorgalla; Licensed MIT 
+ *   Copyright (c) 2016 Jan Sorgalla; Licensed MIT
  * ------------------------------------------------------------------- */
 .lity {
    z-index: 9990;
@@ -267,7 +267,7 @@
 
 
 /* ===================================================================
- * # Animate on Scroll 
+ * # Animate on Scroll
  *   https://michalsnik.github.io/aos/
  *
  * ------------------------------------------------------------------- */
@@ -1424,9 +1424,6 @@ body[data-aos-easing=ease-in-out-quart] [data-aos] {
    transform: perspective(2500px) rotateX(0);
 }
 
-/*# sourceMappingURL=aos.css.map*/
-
-
 /* ===================================================================
  * # Slick Slider
  *
@@ -2326,7 +2323,7 @@ Reference: http://blog.rrwd.nl/2015/04/04/the-screen-reader-text-class-why-and-h
 
 
 /* ===================================================================
- * # prettyprint GitHub Theme 
+ * # prettyprint GitHub Theme
  *
  * ------------------------------------------------------------------- */
 .prettyprint {
@@ -2476,5 +2473,3 @@ li.L9 {
 
    /* */
 }
-
-/*# sourceMappingURL=vendor.css.map */
