@@ -664,6 +664,7 @@ input[type="button"].btn--primary:focus {
 }
 
 .masonry .entry__thumb {
+	background-color: #FFF;
    position: relative;
    overflow: hidden;
 }

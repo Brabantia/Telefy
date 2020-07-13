@@ -3,15 +3,11 @@ package telefy.controller;
 import telefy.model.ResourceModel;
 import telefy.entity.Resource;
 import telefy.view.FileView;
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
-import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import telefy.HttpRequest;
 import telefy.HttpResponse;
 
-public class FileHandler implements HttpHandler {
+public class FileHandler extends SafeHttpHandler {
 	private final ResourceModel resourceModel;
 
 	public FileHandler(ResourceModel resourdeModel) {
@@ -19,10 +15,7 @@ public class FileHandler implements HttpHandler {
 	}
 
 	@Override
-	public void handle(HttpExchange httpExchange) throws IOException {
-		HttpRequest req = new HttpRequest(httpExchange);
-		HttpResponse resp = new HttpResponse(httpExchange);
-
+	public void handle(HttpRequest req, HttpResponse resp) throws IOException {
 		Resource resource = this.resourceModel.get(req.getPath());
 		if (resource == null) {
 			resp.respondNotFound();
