@@ -57,6 +57,7 @@ public class IndexHandler extends SafeHttpHandler {
 			String os = phone.getOperating_system();
 			view.setTags(new PhoneView.Tag(man, "index.html?man=" + man),
 					new PhoneView.Tag(os, "index.html?os=" + os));
+			view.setLogo(os);
 			view.setImage(phone.getPicture(), phone.getModel());
 			view.setTitle(phone.getModel());
 			view.setText(phone.getDescription());

@@ -624,8 +624,53 @@ input[type="button"].btn--primary:focus {
    z-index: 1;
 }
 
-.masonry .entry__thumb-link::after {
+.masonry .android__logo::after {
    background-image: url(../images/icons/android.png);
+   background-repeat: repeat;
+   background-size: 5rem 5rem;
+   background-position: 50% 50%;
+   height: 5rem;
+   width: 5rem;
+   content: " ";
+   z-index: 1;
+   display: block;
+   position: absolute;
+   left: 0;
+   top: 0;
+}
+
+.masonry .blackberry__logo::after {
+   background-image: url(../images/icons/blackberry.png);
+   background-repeat: repeat;
+   background-size: 5rem 5rem;
+   background-position: 50% 50%;
+   height: 5rem;
+   width: 5rem;
+   content: " ";
+   z-index: 1;
+   display: block;
+   position: absolute;
+   left: 0;
+   top: 0;
+}
+
+.masonry .ios__logo::after {
+   background-image: url(../images/icons/ios.png);
+   background-repeat: repeat;
+   background-size: 5rem 5rem;
+   background-position: 50% 50%;
+   height: 5rem;
+   width: 5rem;
+   content: " ";
+   z-index: 1;
+   display: block;
+   position: absolute;
+   left: 0;
+   top: 0;
+}
+
+.masonry .windows__logo::after {
+   background-image: url(../images/icons/windows.png);
    background-repeat: repeat;
    background-size: 5rem 5rem;
    background-position: 50% 50%;
