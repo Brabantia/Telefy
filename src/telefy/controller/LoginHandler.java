@@ -12,13 +12,14 @@ import telefy.HttpRequest;
 import telefy.HttpResponse;
 
 public class LoginHandler extends SafeHttpHandler {
-	public final String LOGIN_TEMPLATE = "templates/login.html";
+	public static final String HASH_FUNCTION = "SHA-512";
+	public static final String LOGIN_TEMPLATE = "templates/login.html";
 
 	private final AccountsModel accountsModel;
 	private final ResourceModel resourceModel;
 	private final TemplateController templateController;
 
-	public LoginHandler(TemplateController tc, ResourceModel rm, AccountsModel am)  {
+	public LoginHandler(TemplateController tc, ResourceModel rm, AccountsModel am) {
 		this.templateController = tc;
 		this.resourceModel = rm;
 		this.accountsModel = am;
@@ -64,17 +65,17 @@ public class LoginHandler extends SafeHttpHandler {
 
 	public static String hash(String password) {
 		StringBuilder hexString = new StringBuilder();
-      MessageDigest md = getHashFunction();
-      md.update(password.getBytes());
-      for (byte data : md.digest()) {
-         hexString.append(Integer.toHexString(0xFF & data));
-      }
+		MessageDigest md = getHashFunction();
+		md.update(password.getBytes());
+		for (byte data : md.digest()) {
+			hexString.append(Integer.toHexString(0xFF & data));
+		}
 		return hexString.toString();
 	}
 
 	public static MessageDigest getHashFunction() {
 		try {
-			return MessageDigest.getInstance("SHA-512");
+			return MessageDigest.getInstance(HASH_FUNCTION);
 		} catch (NoSuchAlgorithmException e) {
 			System.err.println("Missing needed crypto hash function (SHA-512) needed for using login:");
 			e.printStackTrace();
