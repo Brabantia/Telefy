@@ -5,9 +5,10 @@ import telefy.view.HtmlPageView;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import java.io.IOException;
+import telefy.HttpRequest;
 import telefy.HttpResponse;
 
-public class ReloadHandler implements HttpHandler {
+public class ReloadHandler extends SafeHttpHandler {
 	private final FileResourceModel resourceModel;
 
 	public ReloadHandler(FileResourceModel resourceModel) {
@@ -15,8 +16,8 @@ public class ReloadHandler implements HttpHandler {
 	}
 
 	@Override
-	public void handle(HttpExchange exchange) throws IOException {
+	public void handle(HttpRequest req, HttpResponse resp) throws IOException {
 		this.resourceModel.loadResources();
-		(new HttpResponse(exchange)).set(new HtmlPageView("Resources Reloaded!")).respondOk();
+		resp.set(new HtmlPageView("Resources Reloaded!")).respondOk();
 	}
 }

@@ -5,13 +5,11 @@ import telefy.model.AccountsModel;
 import telefy.entity.Account;
 import telefy.view.LoginErrorTagView;
 import telefy.view.TemplatedPageView;
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
 import java.io.IOException;
 import telefy.HttpRequest;
 import telefy.HttpResponse;
 
-public class LoginHandler implements HttpHandler {
+public class LoginHandler extends SafeHttpHandler {
 	public final String LOGIN_TEMPLATE = "templates/login.html";
 
 	private final AccountsModel accountsModel;
@@ -25,20 +23,7 @@ public class LoginHandler implements HttpHandler {
 	}
 
 	@Override
-	public void handle(HttpExchange httpExchange) throws IOException {
-		try {
-			handleResponse(httpExchange);
-		} catch (Exception e) {
-			System.err.println("Failed to process request.");
-			e.printStackTrace();
-			throw e;
-		}
-	}
-
-	private void handleResponse(HttpExchange httpExchange) throws IOException {
-		HttpRequest req = new HttpRequest(httpExchange);
-		HttpResponse resp = new HttpResponse(httpExchange);
-
+	public void handle(HttpRequest req, HttpResponse resp) throws IOException {
 		TemplatedPageView template = this.templateController.getTemplatePage(req);
 		resp.set(template);
 
