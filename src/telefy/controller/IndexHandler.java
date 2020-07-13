@@ -5,6 +5,7 @@ import telefy.view.PhoneView;
 import telefy.view.GridLayoutView;
 import telefy.view.TemplatedPageView;
 import java.io.IOException;
+import java.util.List;
 import telefy.HttpRequest;
 import telefy.HttpResponse;
 import telefy.entity.Product;
@@ -36,8 +37,17 @@ public class IndexHandler extends SafeHttpHandler {
 		GridLayoutView layoutView = new GridLayoutView();
 		indexView.put(layoutView);
 
+		List<Product> phoneList;
+		if (req.contains("os")) {
+			phoneList = this.productsModel.getProductsWithOs(req.get("os"));
+		} else if (req.contains("man")) {
+			phoneList = this.productsModel.getProductsFromManufacturer(req.get("man"));
+		} else {
+			phoneList = this.productsModel.getAllProducts();
+		}
+
 		int max = PHONES_PER_PAGE;
-		for (Product phone : productsModel.getAllProducts()) {
+		for (Product phone : phoneList) {
 			if (--max <= 0) {
 				break;
 			}
@@ -47,6 +57,7 @@ public class IndexHandler extends SafeHttpHandler {
 			String os = phone.getOperating_system();
 			view.setTags(new PhoneView.Tag(man, "index.html?man=" + man),
 					new PhoneView.Tag(os, "index.html?os=" + os));
+			view.setLogo(os);
 			view.setImage(phone.getPicture(), phone.getModel());
 			view.setTitle(phone.getModel());
 			view.setText(phone.getDescription());

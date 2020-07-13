@@ -34,6 +34,7 @@ public class StoreServer {
 
 	private static Connection sqlServer;
 	private static HttpServer webServer;
+	private static boolean started = false;
 
 	/**
 	 *
@@ -42,6 +43,15 @@ public class StoreServer {
 	 * @throws SQLException
 	 */
 	public static void main(String[] args) throws IOException, SQLException {
+		start();
+	}
+
+	public static void start() throws IOException, SQLException {
+		if (started) {
+			System.err.println("Cannot start a server that has already been started. You must stop it first.");
+			System.exit(-1);
+		}
+		started = true;
 		// Create server instances.
 		webServer = HttpServer.create(new InetSocketAddress(PORT), 0);
 		String url = "jdbc:sqlserver://" + SQL_SERVER + ":" + SQL_PORT + ";databaseName=" + SQL_DATABASE;
@@ -56,19 +66,25 @@ public class StoreServer {
 		System.out.println(resourceModel);
 
 		// Create helper classes.
-		TemplateController templateController = new TemplateController(resourceModel, productsModel);
+		TemplateController templateController = new TemplateController(resourceModel, accountsModel, productsModel);
 
 		// Create webpages.
 		webServer.createContext("/", new IndexHandler(templateController, resourceModel, productsModel));
 		webServer.createContext("/login", new LoginHandler(templateController, resourceModel, accountsModel));
 		webServer.createContext("/logout", new LogoutHandler());
 		webServer.createContext("/res", new FileHandler(resourceModel));
-		webServer.createContext("/reload", new ReloadHandler(resourceModel));
+		webServer.createContext("/reload", new ReloadHandler(resourceModel, accountsModel));
 		webServer.createContext("/about", new AboutHandler(templateController, resourceModel));
 
 		// Start accepting HTTP requests.
 		webServer.setExecutor(Executors.newFixedThreadPool(30));
 		webServer.start();
 		System.out.println("Server started on port " + PORT);
+	}
+
+	public static void stop() throws SQLException {
+		webServer.stop(2);
+		sqlServer.close();
+		started = false;
 	}
 }

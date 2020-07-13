@@ -12,19 +12,19 @@ public abstract class SafeHttpHandler implements HttpHandler {
 	public void handle(HttpExchange exchange) throws IOException {
 		HttpRequest req = new HttpRequest(exchange);
 		HttpResponse resp = new HttpResponse(exchange);
-		
+
 		System.out.println("Received Request: " + req.getUri());
-				
+
 		try {
 			handle(req, resp);
 		} catch (Exception e) {
 			System.err.println("Failed to process request.");
 			e.printStackTrace();
-			
+
 			resp.set(new HtmlPageView("Server Error: " + e.getMessage()));
 			resp.respondError();
 		}
 	}
-	
+
 	public abstract void handle(HttpRequest req, HttpResponse resp) throws IOException;
 }

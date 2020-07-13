@@ -147,7 +147,7 @@ public class SqlProductsModel implements ProductsModel {
 
 	@Override
 	public List<Product> getProductsWithOs(String operatingSystem) {
-		String query = "SELECT * FROM PRODUCT WHERE operating_system = '" + operatingSystem + "';";
+		String query = "SELECT * FROM PRODUCT WHERE operating_system = '" + operatingSystem + "' ORDER BY price DESC;";
 		ArrayList<Product> products = new ArrayList<>();
 		for (int attempt = 1; attempt <= 3; ++attempt) {
 			try {
@@ -165,7 +165,7 @@ public class SqlProductsModel implements ProductsModel {
 
 	@Override
 	public List<Product> getProductsFromManufacturer(String manufacturer) {
-		String query = "SELECT * FROM PRODUCT WHERE manufacturer = '" + manufacturer + "';";
+		String query = "SELECT * FROM PRODUCT WHERE manufacturer = '" + manufacturer + "' ORDER BY price DESC;";
 		ArrayList<Product> products = new ArrayList<>();
 		for (int attempt = 1; attempt <= 3; ++attempt) {
 			try {
