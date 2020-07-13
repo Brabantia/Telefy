@@ -59,6 +59,10 @@ public class HttpRequest {
 		return argsMap.get(key);
 	}
 
+	public String get(String key, String defaultValue) {
+		return argsMap.getOrDefault(key, defaultValue);
+	}
+
 	public URI getUri() {
 		return this.uri;
 	}
