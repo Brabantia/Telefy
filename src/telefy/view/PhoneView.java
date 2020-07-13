@@ -1,5 +1,7 @@
 package telefy.view;
 
+import java.math.BigDecimal;
+
 public class PhoneView extends TemplatedPageView {
 	public static final String PRICE_TAG = "PRICE";
 	public static final String TEXT_TAG = "TEXT";
@@ -41,14 +43,17 @@ public class PhoneView extends TemplatedPageView {
 		super(template);
 	}
 
-	public void setPrice(int price) {
-		if (price < 0) {
+	public void setPrice(BigDecimal price) {
+		if (price == null || price.compareTo(BigDecimal.ZERO) < 0) {
+			return;
+		}
+		if (price.doubleValue() < 0) {
 			throw new RuntimeException("Price must be non-negative: " + price);
 		}
-		if (price == 0) {
+		if (BigDecimal.ZERO.equals(price)) {
 			super.put(new HtmlPageView(PRICE_TAG, "FREE"));
 		} else {
-			super.put(new HtmlPageView(PRICE_TAG, "$"+price));
+			super.put(new HtmlPageView(PRICE_TAG, "$"+price.setScale(2)));
 		}
 	}
 
@@ -69,6 +74,9 @@ public class PhoneView extends TemplatedPageView {
 	}
 
 	public void setImage(String url, String altText) {
+		if (url == null || url.isEmpty()) {
+			return;
+		}
 		if (altText == null) {
 			altText = "";
 		}
@@ -77,6 +85,9 @@ public class PhoneView extends TemplatedPageView {
 	}
 
 	public void setLogo(String logo) {
+		if (logo == null || logo.isEmpty()) {
+			return;
+		}
 		super.put(new HtmlPageView(LOGO_TAG, LOGO_START+logo.toLowerCase()+LOGO_END));
 	}
 }
