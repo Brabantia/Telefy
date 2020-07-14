@@ -1,61 +1,61 @@
 package telefy.model;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import telefy.entity.Product;
 
-public class SqlProductsModel implements ProductsModel {
-
-	private static final String[] COLUMNS = {"product_id", "model", "manufacturer", "description", "operating_system", "picture", "application", "price", "product_status"};
+public class SqlProductsModel extends SqlModel<Product> implements ProductsModel {
+	private static final SqlColumn<Integer> ID = new SqlColumn<>("product_id", 0);
+	private static final SqlColumn<String> MODEL = new SqlColumn<>("model", "");
+	private static final SqlColumn<String> MANUFACTURER = new SqlColumn<>("manufacturer", "");
+	private static final SqlColumn<String> DESCRIPTION = new SqlColumn<>("description", "");
+	private static final SqlColumn<String> OS = new SqlColumn<>("operating_system", "");
+	private static final SqlColumn<String> PICTURE = new SqlColumn<>("picture", "");
+	private static final SqlColumn<String> APP = new SqlColumn<>("application", "");
+	private static final SqlColumn<BigDecimal> PRICE = new SqlColumn<>("price", new BigDecimal(0));
+	private static final SqlColumn<String> STATUS = new SqlColumn<>("product_status", "");
 	private final Connection sqlServer;
 
 	public SqlProductsModel(Connection sqlServer) {
 		this.sqlServer = sqlServer;
 	}
 
-	private Product parseRow(ResultSet rs) throws SQLException {
-		int[] indices = new int[COLUMNS.length];
-
-		for (int a = 0; a < COLUMNS.length; ++a) {
-			indices[a] = -1;
-			try {
-				indices[a] = rs.findColumn(COLUMNS[a]);
-			} catch (SQLException ignored) {
-			} // Ignore as the column was just missing in this query.
-		}
+	@Override
+	public Product parseRow(ResultSet rs) {
 		Product product = new Product();
 
-		if (indices[0] >= 0) {
-			product.setId(rs.getInt(indices[0]));
+		if (APP.isPresentIn(rs)) {
+			product.setApplication(APP.getValue(rs));
 		}
-		if (indices[1] >= 0) {
-			product.setModel(rs.getString(indices[1]));
+		if (ID.isPresentIn(rs)) {
+			product.setId(ID.getValue(rs));
 		}
-		if (indices[2] >= 0) {
-			product.setManufacturer(rs.getString(indices[2]));
+		if (MODEL.isPresentIn(rs)) {
+			product.setModel(MODEL.getValue(rs));
 		}
-		if (indices[3] >= 0) {
-			product.setDescription(rs.getString(indices[3]));
+		if (MANUFACTURER.isPresentIn(rs)) {
+			product.setManufacturer(MANUFACTURER.getValue(rs));
 		}
-		if (indices[4] >= 0) {
-			product.setOperating_system(rs.getString(indices[4]));
+		if (DESCRIPTION.isPresentIn(rs)) {
+			product.setDescription(DESCRIPTION.getValue(rs));
 		}
-		if (indices[5] >= 0) {
-			product.setPicture(rs.getString(indices[5]));
+		if (OS.isPresentIn(rs)) {
+			product.setOs(OS.getValue(rs));
 		}
-		if (indices[6] >= 0) {
-			product.setApplication(rs.getString(indices[6]));
+		if (PICTURE.isPresentIn(rs)) {
+			product.setPicture(PICTURE.getValue(rs));
 		}
-		if (indices[7] >= 0) {
-			product.setPrice(rs.getInt(indices[7]));
+		if (APP.isPresentIn(rs)) {
+			product.setApplication(APP.getValue(rs));
 		}
-		if (indices[8] >= 0) {
-			product.setStatus(rs.getString(indices[8]));
+		if (PRICE.isPresentIn(rs)) {
+			product.setPrice(PRICE.getValue(rs));
+		}
+		if (STATUS.isPresentIn(rs)) {
+			product.setStatus(STATUS.getValue(rs));
 		}
 
 		return product;
@@ -64,121 +64,69 @@ public class SqlProductsModel implements ProductsModel {
 	@Override
 	public Product getProduct(int id) {
 		String query = "SELECT * FROM Product WHERE product_id = " + id + ";";
-
-		for (int attempt = 1; attempt <= 3; ++attempt) {
-			try {
-				ResultSet rs = this.sqlServer.createStatement().executeQuery(query);
-				return rs.next() ? parseRow(rs) : new Product();
-			} catch (SQLException ex) {
-				Logger.getLogger(SqlProductsModel.class.getName()).log(Level.SEVERE, null, ex);
-			}
+		List<Product> products = super.select(this.sqlServer, query);
+		if (products == null || products.size() <= 0) {
+			return null;
 		}
-		return null;
+		return products.get(0);
 	}
 
 	@Override
 	public Product getProduct(String model) {
 		String query = "SELECT * FROM Product WHERE model = '" + model + "';";
-
-		for (int attempt = 1; attempt <= 3; ++attempt) {
-			try {
-				ResultSet rs = this.sqlServer.createStatement().executeQuery(query);
-				return rs.next() ? parseRow(rs) : new Product();
-			} catch (SQLException ex) {
-				Logger.getLogger(SqlProductsModel.class.getName()).log(Level.SEVERE, null, ex);
-			}
+		List<Product> products = super.select(this.sqlServer, query);
+		if (products == null || products.size() <= 0) {
+			return null;
 		}
-		return null;
+		return products.get(0);
 	}
 
 	@Override
 	public List<Product> getAllProducts() {
 		String query = "SELECT * FROM Product ORDER BY price DESC;";
-		ArrayList<Product> products = new ArrayList<>();
-		for (int attempt = 1; attempt <= 3; ++attempt) {
-			try {
-				ResultSet rs = this.sqlServer.createStatement().executeQuery(query);
-				while (rs.next()) {
-					products.add(parseRow(rs));
-				}
-				return products;
-			} catch (SQLException ex) {
-				Logger.getLogger(SqlProductsModel.class.getName()).log(Level.SEVERE, null, ex);
-			}
-		}
-		return null;
+		return super.select(this.sqlServer, query);
 	}
 
 	@Override
 	public List<String> getAllOperatingSystems() {
 		String query = "SELECT DISTINCT operating_system FROM Product ORDER BY operating_system ASC;";
+		List<Product> products = super.select(this.sqlServer, query);
 		ArrayList<String> os = new ArrayList<>();
-		for (int attempt = 1; attempt <= 3; ++attempt) {
-			try {
-				ResultSet rs = this.sqlServer.createStatement().executeQuery(query);
-				while (rs.next()) {
-					os.add(rs.getString("operating_system"));
-				}
-				return os;
-			} catch (SQLException ex) {
-				Logger.getLogger(SqlProductsModel.class.getName()).log(Level.SEVERE, null, ex);
-			}
+		for (Product p : products) {
+			os.add(p.getOs());
 		}
-		return null;
+		return os;
 	}
 
 	@Override
 	public List<String> getAllManufacturers() {
 		String query = "SELECT DISTINCT manufacturer FROM Product ORDER BY manufacturer ASC;";
-		for (int attempt = 1; attempt <= 3; ++attempt) {
-			ArrayList<String> manufacturers = new ArrayList<>();
-			try {
-				ResultSet rs = this.sqlServer.createStatement().executeQuery(query);
-				while (rs.next()) {
-					manufacturers.add(rs.getString("manufacturer"));
-				}
-				return manufacturers;
-			} catch (SQLException ex) {
-				Logger.getLogger(SqlProductsModel.class.getName()).log(Level.SEVERE, null, ex);
-			}
+		List<Product> products = super.select(this.sqlServer, query);
+		ArrayList<String> manufacturers = new ArrayList<>();
+		for (Product p : products) {
+			manufacturers.add(p.getManufacturer());
 		}
-		return null;
+		return manufacturers;
 	}
 
 	@Override
 	public List<Product> getProductsWithOs(String operatingSystem) {
 		String query = "SELECT * FROM PRODUCT WHERE operating_system = '" + operatingSystem + "' ORDER BY price DESC;";
-		ArrayList<Product> products = new ArrayList<>();
-		for (int attempt = 1; attempt <= 3; ++attempt) {
-			try {
-				ResultSet rs = this.sqlServer.createStatement().executeQuery(query);
-				while (rs.next()) {
-					products.add(parseRow(rs));
-				}
-				return products;
-			} catch (SQLException ex) {
-				Logger.getLogger(SqlProductsModel.class.getName()).log(Level.SEVERE, null, ex);
-			}
-		}
-		return null;
+		return super.select(this.sqlServer, query);
 	}
 
 	@Override
 	public List<Product> getProductsFromManufacturer(String manufacturer) {
 		String query = "SELECT * FROM PRODUCT WHERE manufacturer = '" + manufacturer + "' ORDER BY price DESC;";
-		ArrayList<Product> products = new ArrayList<>();
-		for (int attempt = 1; attempt <= 3; ++attempt) {
-			try {
-				ResultSet rs = this.sqlServer.createStatement().executeQuery(query);
-				while (rs.next()) {
-					products.add(parseRow(rs));
-				}
-				return products;
-			} catch (SQLException ex) {
-				Logger.getLogger(SqlProductsModel.class.getName()).log(Level.SEVERE, null, ex);
-			}
-		}
-		return null;
+		return super.select(this.sqlServer, query);
 	}
 
+	@Override
+	public Product getProductById(String id) {
+		try {
+			return getProduct(Integer.parseInt(id));
+		} catch (NumberFormatException ignored) {
+			return new Product();
+		}
+	}
 }

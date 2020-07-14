@@ -1,5 +1,8 @@
 package telefy.entity;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class Product {
 	private int id;
 	private String model;
@@ -8,7 +11,7 @@ public class Product {
 	private String operating_system;
 	private String picture;
 	private String application;
-	private int price;
+	private BigDecimal price;
 	private String status;
 
 	/**
@@ -70,14 +73,14 @@ public class Product {
 	/**
 	 * @return the operating_system
 	 */
-	public String getOperating_system() {
+	public String getOs() {
 		return operating_system;
 	}
 
 	/**
 	 * @param operating_system the operating_system to set
 	 */
-	public void setOperating_system(String operating_system) {
+	public void setOs(String operating_system) {
 		this.operating_system = operating_system;
 	}
 
@@ -112,14 +115,14 @@ public class Product {
 	/**
 	 * @return the price
 	 */
-	public int getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
 	/**
 	 * @param price the price to set
 	 */
-	public void setPrice(int price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 
@@ -135,5 +138,24 @@ public class Product {
 	 */
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder text = new StringBuilder();
+
+		text.append("Product[");
+		text.append("\nid=").append(id);
+		text.append("\nmodel=").append(model);
+		text.append("\nmanufacturer=").append(manufacturer);
+		text.append("\ndescription=").append(description);
+		text.append("\noperating_system=").append(operating_system);
+		text.append("\npicture=").append(picture);
+		text.append("\napplication=").append(application);
+		text.append("\nprice=").append(price);
+		text.append("\nstatus=").append(status);
+		text.append("\n]");
+
+		return text.toString();
 	}
 }

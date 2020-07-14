@@ -74,7 +74,7 @@ public class SqlAccountsModel implements AccountsModel {
 				account.setPasswordHash(rs.getString("password_hash"));
 				return account;
 			} catch (SQLException ex) {
-				Logger.getLogger(SqlAccountsModel.class.getName()).log(Level.SEVERE, null, ex);
+				ex.printStackTrace();
 			}
 		}
 		return null;
