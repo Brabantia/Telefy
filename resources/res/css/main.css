@@ -588,27 +588,27 @@ input[type="button"].btn--primary:focus {
 /* -------------------------------------------------------------------
  * ## masonry entries
  * ------------------------------------------------------------------- */
-.masonry .entry {
+.entry {
    margin-bottom: 40px;
 }
 
-.masonry .entry__thumb, .masonry .entry__text {
+.entry__thumb, .entry__text {
    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.05);
 }
 
-.masonry .entry__thumb {
+.entry__thumb {
 	background-color: #FFF;
    position: relative;
    overflow: hidden;
 }
 
-.masonry .entry__thumb-link img {
+.entry__thumb-link img {
    vertical-align: bottom;
    -webkit-transition: all 0.3s ease-in-out;
    transition: all 0.3s ease-in-out;
 }
 
-.masonry .entry__thumb-link::before {
+.entry__thumb-link::before {
    content: "";
    display: block;
    background: rgba(0, 0, 0, 0.8);
@@ -624,7 +624,7 @@ input[type="button"].btn--primary:focus {
    z-index: 1;
 }
 
-.masonry .android__logo::after {
+.android__logo::after {
    background-image: url(../images/icons/android.png);
    background-repeat: repeat;
    background-size: 5rem 5rem;
@@ -639,7 +639,7 @@ input[type="button"].btn--primary:focus {
    top: 0;
 }
 
-.masonry .blackberry__logo::after {
+.blackberry__logo::after {
    background-image: url(../images/icons/blackberry.png);
    background-repeat: repeat;
    background-size: 5rem 5rem;
@@ -654,7 +654,7 @@ input[type="button"].btn--primary:focus {
    top: 0;
 }
 
-.masonry .ios__logo::after {
+.ios__logo::after {
    background-image: url(../images/icons/ios.png);
    background-repeat: repeat;
    background-size: 5rem 5rem;
@@ -669,7 +669,7 @@ input[type="button"].btn--primary:focus {
    top: 0;
 }
 
-.masonry .windows__logo::after {
+.windows__logo::after {
    background-image: url(../images/icons/windows.png);
    background-repeat: repeat;
    background-size: 5rem 5rem;
@@ -684,77 +684,77 @@ input[type="button"].btn--primary:focus {
    top: 0;
 }
 
-.masonry .entry__thumb:hover .entry__thumb-link img {
+.entry__thumb:hover .entry__thumb-link img {
    -webkit-transform: scale(1.05);
    -ms-transform: scale(1.05);
    transform: scale(1.05);
 }
 
-.masonry .entry__text {
+.entry__text {
    padding: 2rem;
    background-color: #333;
    background-image: url(../images/background-cell.jpg);
 }
 
-.masonry .entry__title {
+.entry__title {
    font-size: 2.4rem;
    line-height: 1.375;
    margin-top: 0;
    margin-bottom: 2.1rem;
 }
 
-.masonry .entry__title a {
+.entry__title a {
    color: #FFF;
    border-bottom: 1px solid transparent;
 }
 
-.masonry .entry__title a:hover, .masonry .entry__title a:focus {
+.entry__title a:hover, .entry__title a:focus {
    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 }
 
-.masonry .entry__date {
+.entry__date {
    font-size: 1.4rem;
    line-height: 1.714;
    margin-bottom: .6rem;
 }
 
-.masonry .entry__date a {
+.entry__date a {
    color: #858585;
 }
 
-.masonry .entry__excerpt {
+.entry__excerpt {
    font-size: 1.5rem;
    line-height: 1.8;
    color: #BBB;
 }
 
-.masonry .entry__meta {
+.entry__meta {
    font-size: 1.5rem;
    margin-bottom: 0;
 }
 
-.masonry .entry__meta a {
+.entry__meta a {
    color: #09F;
 }
 
-.masonry .entry__meta a:hover, .masonry .entry__meta a:focus {
+.entry__meta a:hover, .entry__meta a:focus {
    color: #000000;
 }
 
-.masonry .entry__meta-links a::after {
+.entry__meta-links a::after {
    content: ", ";
 }
 
-.masonry .entry__meta-links a:last-child::after {
+.entry__meta-links a:last-child::after {
    display: none;
 }
 
-.masonry .entry__pricing {
+.entry__pricing {
    font-size: 2rem;
    color: #09F;
 }
 
-.masonry .entry__pricing button {
+.entry__pricing button {
 	display: block;
 	font-size: 2rem;
 	letter-spacing: unset;

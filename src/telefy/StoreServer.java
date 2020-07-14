@@ -1,5 +1,6 @@
 package telefy;
 
+import telefy.controller.PhoneHandler;
 import telefy.controller.AboutHandler;
 import telefy.controller.LoginHandler;
 import telefy.controller.LogoutHandler;
@@ -70,6 +71,7 @@ public class StoreServer {
 
 		// Create webpages.
 		webServer.createContext("/", new IndexHandler(templateController, resourceModel, productsModel));
+		webServer.createContext("/phone", new PhoneHandler(templateController, resourceModel, productsModel));
 		webServer.createContext("/login", new LoginHandler(templateController, resourceModel, accountsModel));
 		webServer.createContext("/logout", new LogoutHandler());
 		webServer.createContext("/res", new FileHandler(resourceModel));
