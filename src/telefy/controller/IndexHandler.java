@@ -15,7 +15,7 @@ import telefy.model.ProductsModel;
 public class IndexHandler extends SafeHttpHandler {
 
 	public static final String PHONE_TEMPLATE = "templates/phone.html";
-	public static final int PHONES_PER_PAGE = 20;
+	public static final int PHONES_PER_PAGE = 30;
 
 	private final ResourceModel resourceModel;
 	private final TemplateController templateController;
@@ -51,15 +51,15 @@ public class IndexHandler extends SafeHttpHandler {
 			if (--max <= 0) {
 				break;
 			}
-			PhoneView view = new PhoneView(new String(resourceModel.get(PHONE_TEMPLATE).getData()));
+			PhoneView view = new PhoneView(new String(resourceModel.get(PHONE_TEMPLATE).getData()), PhoneView.GRID_VIEW);
 
 			String man = phone.getManufacturer();
 			String os = phone.getOs();
 			view.setTags(new PhoneView.Tag(man, "index.html?man=" + man),
 					new PhoneView.Tag(os, "index.html?os=" + os));
-			view.setLogo(os);
+			view.setLogo(os, phone.getId());
 			view.setImage(phone.getPicture(), phone.getModel());
-			view.setTitle(phone.getModel());
+			view.setTitle(phone.getModel(), phone.getId());
 			view.setText(phone.getDescription());
 			view.setPrice(phone.getPrice());
 

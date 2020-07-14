@@ -120,4 +120,13 @@ public class SqlProductsModel extends SqlModel<Product> implements ProductsModel
 		String query = "SELECT * FROM PRODUCT WHERE manufacturer = '" + manufacturer + "' ORDER BY price DESC;";
 		return super.select(this.sqlServer, query);
 	}
+
+	@Override
+	public Product getProductById(String id) {
+		try {
+			return getProduct(Integer.parseInt(id));
+		} catch (NumberFormatException ignored) {
+			return new Product();
+		}
+	}
 }
